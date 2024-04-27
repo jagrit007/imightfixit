@@ -22,6 +22,17 @@ const Login = () => {
 
     const handleLogin = async (e)=>{
         e.preventDefault();
+        if (!username || !password) {
+            alert("Please fill in both username and password fields.");
+            return;
+        }
+    
+        // Password validation: Check if the password meets minimum length requirement
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return;
+        }
+        
         try {
             const response = await axios.post('http://localhost:3000/login', { username, password })
             const token = response.data.token
