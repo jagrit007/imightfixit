@@ -10,6 +10,8 @@ import Account from './pages/Account';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import About from './components/About'
+import Checkout from './pages/Checkout';
+import React from 'react';
 
 function App() {
   
@@ -28,6 +30,7 @@ function App() {
         <Route path='/UserDashboard' element={<UserDashboard/>}/>
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
         <Route path='/about' element={<About />}/>
+        <Route path='/checkout' element={<Checkout />}/>
       </Routes>
       <Footer />
     </div>
