@@ -2,13 +2,25 @@ import React, { useState,useEffect  } from 'react';
 import axios from 'axios'; // Import Axios library
 
 const AdminPage = () => {
+  const userToken = localStorage.getItem('token');
   const [serviceType, setServiceType] = useState('');
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [serviceTitle, setServiceTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priceRange, setPriceRange] = useState('');
   const [duration, setDuration] = useState('');
+  const [serviceCards, setServiceCards] = useState([
+    {
+      name: "Software Update/Repair",
+      description: "Update or repair your phone's software to improve performance and fix issues.",
+      price: "500",
+      duration: 30,
+      onClick: () => openBookingForm('Software Update/Repair'),
+      icon: <svg className="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 2C3.45 2 3 2.45 3 3V21C3 21.55 3.45 22 4 22H20C20.55 22 21 21.55 21 21V3C21 2.45 20.55 2 20 2H4ZM6 20H4V18H6V20ZM6 16H4V4H6V16ZM8 20H6V18H8V20ZM8 16H6V14H8V16ZM8 12H6V10H8V12ZM12 20H10V18H12V20ZM12 16H10V14H12V16ZM12 12H10V10H12V12ZM16 20H14V18H16V20ZM16 16H14V14H16V16ZM16 12H14V10H16V12ZM20 20H18V18H20V20ZM20 16H18V14H20V16Z" fill="#111827"/></svg>,
+    },
+  ]);
   const [services, setServices] = useState([]); // State to hold services
+  const [savedService, setSavedService] = useState(null);
 
   const openBookingForm = (type) => {
     setServiceType(type);
@@ -23,6 +35,35 @@ const AdminPage = () => {
     setShowBookingModal(true);
   };
 
+  useEffect(() => {
+    // Fetch additional service cards from the database
+    fetchServiceCards();
+  }, []);
+
+  function fetchServiceCards() {
+    axios.get('http://localhost:5000/service/getAll')
+      .then(response => {
+        console.log(response.data.data);
+        if (response.data.status === 'success') {
+          if (response.data.data.length > 0){
+            setServices([...services, ...response.data.data]);
+          }
+        } else {
+          throw new Error('Failed to fetch service cards');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching service cards:', error);
+      });
+  }
+
+  useEffect(() => {
+    if (savedService) {
+      setServices([...services, savedService]);
+      setSavedService(null);
+    }
+  }, [savedService, services]);
+  
   const handleSaveService = () => {
     // Create an object with service details
     const serviceData = {
@@ -44,28 +85,42 @@ const AdminPage = () => {
     setShowBookingModal(false);
 
     // Send the service data to the backend
-    axios.post('http://localhost:5000/add', {name: serviceTitle, price: priceRange, description:description, duration: 10})
-      .then(response => {
-        console.log('Service details saved successfully:', response.data);
-        setShowBookingModal(false);
-        // Clear input fields after saving
-        setServiceTitle('');
-        setDescription('');
-        setPriceRange('');
-      })
-      .catch(error => {
-        console.error('Error saving service details:', error);
-        // Handle error
-      });
+    axios.post('http://localhost:5000/service/add', {
+      name: serviceTitle,
+      price: priceRange,
+      description: description,
+      duration: duration
+    }, {
+      headers: {
+        'Authorization': `${userToken}`
+      }
+    })
+    .then(response => {
+      console.log(response.data);
+      console.log('Service details saved successfully:', response.data);
+      setShowBookingModal(false);
+      // Clear input fields after saving
+      setServiceTitle('');
+      setDescription('');
+      setPriceRange('');
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle error
+    });
   };
 
   const [totalRevenue, setTotalRevenue] = useState(0);
 
   useEffect(() => {
     // Fetch total revenue from backend API
-    axios.get('/api/total-revenue')
+    axios.get('http://127.0.0.1:5000/order/total-revenue', {
+      headers: {
+        'Authorization': `${userToken}`
+      }
+    })
       .then(response => {
-        setTotalRevenue(response.data.totalRevenue);
+        setTotalRevenue(response.data.total_revenue?response.data.total_revenue:0);
       })
       .catch(error => {
         console.error('Error fetching total revenue:', error);
@@ -75,11 +130,12 @@ const AdminPage = () => {
 
   return (
     <div>
+      {/* TODO: change absolute buttons */}
       <button onClick={handleAddService} className="absolute top-20 right-10 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">
         Add Service
       </button>
       <div className="absolute top-20 left-10 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">
-        Total Revenue: ${totalRevenue}
+        Total Revenue: ₹{totalRevenue}
     </div>
     <section className="py-12 bg-gray-900 text-white sm:py-12 lg:py-16">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -92,11 +148,11 @@ const AdminPage = () => {
         {services.map((service, index) => (
           <ServiceCard
             key={index}
-            title={service.serviceTitle}
+            title={service.name}
             icon={<svg className="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 4H3C2.46957 4 1.96086 4.21071 1.58579 4.58579C1.21071 4.96086 1 5.46957 1 6V18C1 18.5304 1.21071 19.0391 1.58579 19.4142C1.96086 19.7893 2.46957 20 3 20H21C21.5304 20 22.0391 19.7893 22.4142 19.4142C22.7893 19.0391 23 18.5304 23 18V6C23 5.46957 22.7893 4.96086 22.4142 4.58579C22.0391 4.21071 21.5304 4 21 4Z" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 20V12H15V20" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 12V6H15V12" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
             description={service.description}
-            priceRange={"₹" + service.priceRange}
-            duration={service.duration+" Number of Days"}
+            priceRange={"₹" + service.price}
+            duration={"Number of Days: " + service.duration}
           />
         ))}
       </div>
