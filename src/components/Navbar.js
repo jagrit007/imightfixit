@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 const Navbar = () => {
 
 	const isUserSignedIn = !!localStorage.getItem('token');
+  const isUserAdmin = localStorage.getItem('role') === "provider"
 	const [showDropdown, setShowDropdown] = useState(false);
 	const navigate = useNavigate();
   const location = useLocation();
@@ -16,6 +17,7 @@ const Navbar = () => {
 	  const handleLogout = () => {
 		// TODO: Implement logout logic here
 		localStorage.removeItem('token');
+    localStorage.removeItem('role');
 		navigate('/login');
 	  };
 
@@ -49,7 +51,11 @@ const Navbar = () => {
               <li className={`md:px-4 md:py-2 ${location.pathname === '/signup' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
                 <Link to="/signup">Register</Link>
               </li>
+              // TODO: ADMIN DASHBOARD
             )}
+            {isUserAdmin && (<li className={`md:px-4 md:py-2 ${location.pathname === '/admin' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
+                <Link to="/admin">Admin Dashboard</Link>
+              </li>)}
 			</ul>
 		</div>
 		<div class="order-2 md:order-3">
