@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import About from './components/About'
 import Checkout from './pages/Checkout';
 import Thanks from './pages/Thanks'
+import Reviews from './pages/Reviews';
 import React from 'react';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path='/about' element={<About />}/>
         <Route path='/checkout' element={<Checkout />}/>
         <Route path='/thanks' element={<Thanks />}/>
+        <Route path='/reviews' element={<Reviews />}/>
       </Routes>
       <Footer />
     </div>

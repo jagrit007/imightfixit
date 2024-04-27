@@ -1,5 +1,6 @@
 import React from 'react';
 import Services from './Services';
+import AboutSection from '../components/About';
 
 const Home = () => {
   return (
@@ -64,7 +65,8 @@ const Home = () => {
       </div>
     </div>
     </div>
-    <Services/>
+    <Services />
+    <AboutSection/>
     </div>
     
   );
