@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Reviews from './pages/Reviews';
+import Services from './pages/Services';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
