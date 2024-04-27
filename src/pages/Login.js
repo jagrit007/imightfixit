@@ -5,7 +5,7 @@ import { useBeforeUnload, useNavigate } from 'react-router-dom';
 const Login = () => {
 
     const [users, setUsers] = useState([])
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
@@ -22,8 +22,8 @@ const Login = () => {
 
     const handleLogin = async (e)=>{
         e.preventDefault();
-        if (!username || !password) {
-            alert("Please fill in both username and password fields.");
+        if (!email || !password) {
+            alert("Please fill in both email and password fields.");
             return;
         }
     
@@ -34,10 +34,11 @@ const Login = () => {
         }
         
         try {
-            const response = await axios.post('http://localhost:3000/login', { username, password })
+            const response = await axios.post('http://localhost:5000/user/login', { email, password })
+            if (response.data?.status =='failure'){alert("Incorrect password!")} 
             const token = response.data.token
             alert("Login successful");
-            setUsername('')
+            setEmail('')
             setPassword('')
             // fetchUsers();
             navigate('/account')
@@ -46,6 +47,7 @@ const Login = () => {
         } catch (error) {
             alert("Incorrect credentials!");
             console.error("Error in login!");
+            console.log(error);
         }
     }
 
@@ -67,10 +69,10 @@ const Login = () => {
                         <div>
                             <div className="flex -mx-3">
                                 <div className="w-full px-3 mb-5">
-                                    <label className="text-xs font-semibold px-1">Username</label>
+                                    <label className="text-xs font-semibold px-1">Email</label>
                                     <div className="flex">
                                         <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center"><i className="mdi mdi-account-outline text-gray-400 text-lg"></i></div>
-                                        <input type="text" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-blue-500" placeholder="John" value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
+                                        <input type="text" className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-blue-500" placeholder="John" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +87,7 @@ const Login = () => {
                             </div>
                             <div className="flex -mx-3">
                                 <div className="w-full px-3 mb-5">
-                                    <button type="submit" className="block w-full max-w-xs mx-auto bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white rounded-lg px-3 py-3 font-semibold">LOGIN NOW</button>
+                                    <button type="submit" onClick={handleLogin} className="block w-full max-w-xs mx-auto bg-blue-500 hover:bg-blue-700 focus:bg-blue-700 text-white rounded-lg px-3 py-3 font-semibold">LOGIN NOW</button>
                                 </div>
                             </div>
                         </div>
