@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
         <Route path='/signup' element={<SignUp />}/>
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
       </Routes>
+      <Footer />
     </div>
   );
 }
