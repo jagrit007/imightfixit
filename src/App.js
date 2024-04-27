@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import About from './components/About'
 import Checkout from './pages/Checkout';
+import Thanks from './pages/Thanks'
 import React from 'react';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
         <Route path='/about' element={<About />}/>
         <Route path='/checkout' element={<Checkout />}/>
+        <Route path='/thanks' element={<Thanks />}/>
       </Routes>
       <Footer />
     </div>

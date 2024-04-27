@@ -1,7 +1,9 @@
 import React from 'react';
+import Services from './Services';
 
 const Home = () => {
   return (
+    <div>
     <div class="bg-gray-900 py-20">
     <div class="container mx-auto px-6 md:px-12">
         <div class="flex flex-col md:flex-row items-center">
@@ -20,22 +22,52 @@ const Home = () => {
                     </a>
                 </div>
             </div>
-            
-          <div class="md:w-1/2 lg:w-1/3 mt-8 md:mt-0">
-              
-              <img src="home.jpg" alt="image description" class="h-auto max-w-xl rounded-lg shadow-xl shadow-xl-right dark:shadow-blue-800"/>
+        
 
+          <div class="md:w-1/2 lg:w-1/3 mt-8 md:mt-0">
+              <img src="home.jpg" alt="image description" class="h-auto max-w-xl rounded-lg shadow-xl shadow-xl-right dark:shadow-blue-800"/>
           </div>
 
-
+        </div>       
+    </div>
+    </div>
+    <div id="features" className="bg-blueGray-200">
+    <div className="container mx-auto px-4 py-8">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Feature Box 1 */}
+        <div className="feature-box">
+          <i className="feature-img fas fa-check-circle text-primary text-4xl"></i>
+          <h3 className="text-xl font-bold text-gray-800 mt-4">Quality Service Assurance</h3>
+          <p className="text-gray-600">Rest easy knowing your device is in good hands. We've completed over 100 successful repairs.</p>
         </div>
+
+        {/* Feature Box 2 */}
+        <div className="feature-box">
+          <i className="feature-img fas fa-smile text-primary text-4xl"></i>
+          <h3 className="text-xl font-bold text-gray-800 mt-4">Customer Satisfaction</h3>
+          <p className="text-gray-600">Our track record speaks for itself: 100+ repaired devices, 100% satisfied customers.</p>
+        </div>
+
+        {/* Feature Box 3 */}
+        <div className="feature-box">
+          <i className="feature-img fas fa-medkit text-primary text-4xl"></i>
+          <h3 className="text-xl font-bold text-gray-800 mt-4">Saved 100+ Device</h3>
+          <p className="text-gray-600">Successfully repaired over 100 devices with satisfied customers.</p>
+        </div>
+
+        {/* Feature Box 3 */}
+        <div className="feature-box">
+          <i className="feature-img fas fa-certificate text-primary text-4xl"></i>
+          <h3 className="text-xl font-bold text-gray-800 mt-4">Professionalism and Reliability</h3>
+          <p className="text-gray-600">100% professionalism: Experience our trusted repair service.</p>
+        </div>
+      </div>
     </div>
     </div>
+    <Services/>
+    </div>
+    
   );
 }
 
 export default Home;
-
-{/* <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-    <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-</div> */}

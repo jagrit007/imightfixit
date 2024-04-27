@@ -100,11 +100,14 @@ const Checkout = () => {
                                 <input className="border rounded-bl rounded-br border-gray-300 p-4 w-full text-base leading-4 placeholder-gray-600 text-gray-600" type="text" placeholder="ZIP" />
                             </div>
 
-                            <button className="mt-8 border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex justify-center items-center py-4 rounded w-full">
-                                <div>
-                                    <p className="text-base leading-4">Pay $54652</p>
-                                </div>
-                            </button>
+                            <a href="/thanks">
+                                <button className="mt-8 border border-transparent hover:border-gray-300 bg-gray-900 hover:bg-white text-white hover:text-gray-900 flex justify-center items-center py-4 rounded w-full">
+                                    <div>
+                                        <p className="text-base leading-4">Pay $54652</p>
+                                    </div>
+                                </button>
+                            </a>
+                            
                         </div>
                     </div>
                 </div>
