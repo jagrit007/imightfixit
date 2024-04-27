@@ -8,6 +8,7 @@ import Services from './pages/Services';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import About from './components/About'
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/reviews' element={<Reviews />}/>
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
+        <Route path='/about' element={<About />}/>
       </Routes>
       <Footer />
     </div>

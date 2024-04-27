@@ -34,7 +34,7 @@ const Navbar = () => {
         <li class="md:px-4 md:py-2 text-indigo-500"><Link to="/">Home</Link></li>
         <li class="md:px-4 md:py-2 hover:text-indigo-400"><Link to="/services">Services</Link></li>
         {!isUserSignedIn && (<li class="md:px-4 md:py-2 hover:text-indigo-400"><Link to="/signup">Register</Link></li>)}
-				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="#">About</a></li>
+				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="/about">About</a></li>
 				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="#">Contact</a></li>
 			</ul>
 		</div>
