@@ -10,7 +10,7 @@ const AdminPage = () => {
   const [duration, setDuration] = useState('');
   const [services, setServices] = useState([]); // State to hold services
 
-  const [status, setStatus] = useState('pending');
+  const [status, setStatus] = useState('');
   
   const openBookingForm = (type) => {
     setServiceType(type);
@@ -76,10 +76,11 @@ const AdminPage = () => {
   }, []); // Empty dependency array means this effect runs once after the component mounts
 
   const renderAcceptOrCompleteButton = (status) => {
-    if (status === 'pending') {
-      return <button className="relative inline-flex text-sm sm:text-base bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg z-50">Accept</button>;
+    if (status === 'in_progress') {
+        return <button className="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Complete</button>;
     } else {
-      return <button className="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Complete</button>;
+        return <button className="relative inline-flex text-sm sm:text-base bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg z-50">Accept</button>;
+        
     }
   };
 
@@ -114,7 +115,7 @@ const AdminPage = () => {
       </section>
     <div class="mt-32">
         <div class="px-4 sm:px-8 max-w-5xl m-auto">
-            <h1 class="text-center font-semibold text-sm">Order History</h1>
+            <h1 class="text-center font-semibold text-sm">Current Orders</h1>
             <p class="mt-2 text-center text-xs mb-4 text-gray-500">Last 10 Orders</p>
             <ul class="border border-gray-200 rounded overflow-hidden shadow-md">
             <li class="flex justify-between px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
@@ -123,6 +124,17 @@ const AdminPage = () => {
                     {renderAcceptOrCompleteButton(status)}
                     <button className="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Cancel</button>
                   </div>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mt-32">
+        <div class="px-4 sm:px-8 max-w-5xl m-auto">
+            <h1 class="text-center font-semibold text-sm">Order History</h1>
+            <p class="mt-2 text-center text-xs mb-4 text-gray-500">Last 10 Orders</p>
+            <ul class="border border-gray-200 rounded overflow-hidden shadow-md">
+            <li class="flex justify-between px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
+            <span>First Item</span>
             </li>
             </ul>
         </div>
