@@ -41,19 +41,19 @@ const AdminPage = () => {
     setShowBookingModal(false);
 
     // Send the service data to the backend
-//     axios.post('YOUR_BACKEND_ENDPOINT', serviceData)
-//       .then(response => {
-//         console.log('Service details saved successfully:', response.data);
-//         setShowBookingModal(false);
-//         // Clear input fields after saving
-//         setServiceTitle('');
-//         setDescription('');
-//         setPriceRange('');
-//       })
-//       .catch(error => {
-//         console.error('Error saving service details:', error);
-//         // Handle error
-//       });
+    axios.post('http://localhost:5000/add', {name: serviceTitle, price: priceRange, description:description, duration: 10})
+      .then(response => {
+        console.log('Service details saved successfully:', response.data);
+        setShowBookingModal(false);
+        // Clear input fields after saving
+        setServiceTitle('');
+        setDescription('');
+        setPriceRange('');
+      })
+      .catch(error => {
+        console.error('Error saving service details:', error);
+        // Handle error
+      });
   };
 
   const [totalRevenue, setTotalRevenue] = useState(0);
