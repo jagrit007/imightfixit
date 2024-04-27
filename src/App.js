@@ -3,7 +3,6 @@ import {Routes, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import Reviews from './pages/Reviews';
 import Services from './pages/Services';
 import UserDashboard from './pages/UserDashboard';
 import Account from './pages/Account';
@@ -39,7 +38,6 @@ function App() {
         <Route path='/about' element={<About />}/>
         {isUserSignedIn && <Route path='/checkout' element={<Checkout />}/>}
         {isUserSignedIn && <Route path='/thanks' element={<Thanks />}/>}
-        <Route path='/reviews' element={<Reviews />}/>
       </Routes>
       <Footer />
     </div>
