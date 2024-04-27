@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import './Navbar.css';
 
 const Navbar = () => {
 
 	const isUserSignedIn = !!localStorage.getItem('token');
 	const [showDropdown, setShowDropdown] = useState(false);
+	const navigate = useNavigate();
 
 	const handleDropdownToggle = () => {
 		setShowDropdown(!showDropdown);
@@ -14,6 +15,7 @@ const Navbar = () => {
 	  const handleLogout = () => {
 		// TODO: Implement logout logic here
 		localStorage.removeItem('token');
+		navigate('/login');
 	  };
 
   return (
