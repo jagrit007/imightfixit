@@ -33,8 +33,8 @@ function App() {
         <Route path='/services' element={<Services/>}/>
         {isUserSignedIn && isUserAdmin && <Route path='/admin' element={<AdminPage/>}/>}
 
-        {isUserSignedIn && <Route path='/UserDashboard' element={<UserDashboard/>}/>}
-        {isUserSignedIn && <Route path='/account' element={<Account />}/>}
+        {isUserSignedIn && <Route path='/account' element={<UserDashboard/>}/>}
+        {/* {isUserSignedIn && <Route path='/account' element={<Account />}/>} */}
         <Route path='/about' element={<About />}/>
         {isUserSignedIn && <Route path='/checkout' element={<Checkout />}/>}
         {isUserSignedIn && <Route path='/thanks' element={<Thanks />}/>}
