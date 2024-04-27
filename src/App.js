@@ -23,6 +23,7 @@ function App() {
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/reviews' element={<Reviews />}/>
+        <Route path='/services' element={<Services/>}/>
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
         <Route path='/about' element={<About />}/>
       </Routes>
