@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 // import './Navbar.css';
 
 const Navbar = () => {
@@ -7,6 +7,7 @@ const Navbar = () => {
 	const isUserSignedIn = !!localStorage.getItem('token');
 	const [showDropdown, setShowDropdown] = useState(false);
 	const navigate = useNavigate();
+  const location = useLocation();
 
 	const handleDropdownToggle = () => {
 		setShowDropdown(!showDropdown);
@@ -31,11 +32,24 @@ const Navbar = () => {
 		</div>
 		<div class="text-gray-500 order-3 w-full md:w-auto md:order-2">
 			<ul class="flex font-semibold justify-between">
-        <li class="md:px-4 md:py-2 text-indigo-500"><Link to="/">Home</Link></li>
-        <li class="md:px-4 md:py-2 hover:text-indigo-400"><Link to="/services">Services</Link></li>
-        {!isUserSignedIn && (<li class="md:px-4 md:py-2 hover:text-indigo-400"><Link to="/signup">Register</Link></li>)}
-				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="/about">About</a></li>
-				<li class="md:px-4 md:py-2 hover:text-indigo-400"><a href="#">Contact</a></li>
+      <li className={`md:px-4 md:py-2 ${location.pathname === '/' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
+              <Link to="/">Home</Link>
+            </li>
+            <li className={`md:px-4 md:py-2 ${location.pathname === '/services' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
+              <Link to="/services">Services</Link>
+            </li>
+            
+            <li className={`md:px-4 md:py-2 ${location.pathname === '/about' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
+              <a href="/about">About</a>
+            </li>
+            <li className={`md:px-4 md:py-2 ${location.pathname === '/contact' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
+              <a href="/contact">Contact</a>
+            </li>
+            {!isUserSignedIn && (
+              <li className={`md:px-4 md:py-2 ${location.pathname === '/signup' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
+                <Link to="/signup">Register</Link>
+              </li>
+            )}
 			</ul>
 		</div>
 		<div class="order-2 md:order-3">
