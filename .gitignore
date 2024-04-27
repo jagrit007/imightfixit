@@ -46,3 +46,6 @@ public/
 .env.test.local
 .env.production.local
 .env.local
+
+#ormconfig
+ormconfig.json
