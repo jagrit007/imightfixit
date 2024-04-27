@@ -12,10 +12,13 @@ import Footer from './components/Footer';
 import About from './components/About'
 import Checkout from './pages/Checkout';
 import React from 'react';
+import AdminPage from './pages/Admin';
 
 function App() {
   
   const isUserSignedIn = !!localStorage.getItem('token')
+  const isUserAdmin = localStorage.getItem('role') === "provider"
+  console.log(isUserAdmin);
 
 
   return (
@@ -27,6 +30,8 @@ function App() {
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/reviews' element={<Reviews />}/>
         <Route path='/services' element={<Services/>}/>
+        {isUserSignedIn && isUserAdmin && <Route path='/admin' element={<AdminPage/>}/>}
+
         <Route path='/UserDashboard' element={<UserDashboard/>}/>
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
         <Route path='/about' element={<About />}/>
