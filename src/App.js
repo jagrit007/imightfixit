@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Reviews from './pages/Reviews';
+import Services from './pages/Services';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         <Route path='/Reviews' element={<Reviews />}/>
+        <Route path='/Services' element={<Services/>}/>
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
       </Routes>
     </div>
