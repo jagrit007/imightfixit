@@ -4,40 +4,92 @@ const companyName = "iMayFixIt";
   const companyDescription = "We are dedicated to providing top-quality mobile repair services with a smile!";
   const missionStatement = "Our mission is to fix phones and bring joy to our customers by restoring their devices to optimal condition.";
 
+
+
+
+const TeamMember = ({ name, title, imageSrc }) => {
+  return (
+    <div className="w-full md:w-6/12 lg:w-3/12 mb-6 px-6 sm:px-6 lg:px-4">
+      <div className="flex flex-col">
+        <a href="#" className="mx-auto">
+          <img
+            className="rounded-2xl drop-shadow-md hover:drop-shadow-xl transition-all duration-200 delay-100"
+            src={imageSrc}
+            alt={name}
+          />
+        </a>
+        <div className="text-center mt-6">
+          <h1 className="text-gray-900 text-xl font-bold mb-1">{name}</h1>
+          <div className="text-gray-700 font-light mb-2">{title}</div>
+          <div className="flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity duration-300">
+            <a href="#" className="flex rounded-full hover:bg-indigo-50 h-10 w-10">
+              <i className="mdi mdi-linkedin text-indigo-700 mx-auto mt-2"></i>
+            </a>
+            <a href="#" className="flex rounded-full hover:bg-blue-50 h-10 w-10">
+              <i className="mdi mdi-twitter text-blue-400 mx-auto mt-2"></i>
+            </a>
+            <a href="#" className="flex rounded-full hover:bg-orange-50 h-10 w-10">
+              <i className="mdi mdi-instagram text-orange-400 mx-auto mt-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+  
+const AboutSection = () => {
   const teamMembers = [
-    { name: "Jay Rathod", role: "Founder & CEO" },
-    { name: "Sidhant Sharma", role: "Head Technician" },
-    { name: "Shaon Ghosh", role: "Marketing Manager" },
-    { name: "Mehul Verma", role: "Sales Representative" },
-    { name: "Jagrit Thapar", role: "Customer Support Specialist" }
+    {
+      name: 'Jay Rathod',
+      title: 'Founder & CEO',
+      imageSrc: 'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?fit=clamp&w=400&h=400&q=80'
+    },
+    {
+      name: 'Sidhant Sharma',
+      title: 'Head Technician',
+      imageSrc: 'https://images.unsplash.com/photo-1636892657080-f6b9ee0733bb?fit=clamp&w=400&h=400&q=80'
+    },
+    {
+      name: 'Shaon Ghosh',
+      title: 'Marketing Manager',
+      imageSrc: 'https://images.unsplash.com/photo-1580923368248-877f237696cd?fit=clamp&w=400&h=400&q=80'
+    },
+    {
+      name: 'Mehul Verma',
+      title: 'Sales Representative',
+      imageSrc: 'https://images.unsplash.com/photo-1646009759852-f035b994a783?fit=clamp&w=400&h=400&q=80'
+    },
+    {
+      name: 'Jagrit Thapar',
+      title: 'Customer Support Specialist',
+      imageSrc: 'https://images.unsplash.com/photo-1649077585967-b5decf6e032a?fit=clamp&w=400&h=400&q=80'
+    }
   ];
 
-const AboutSection = () => {
-  const customBackgroundColor = '153448'; // Hex color code without the '#'
-
   return (
-    <section className={`bg-${customBackgroundColor} py-8 `}>
-      <a
-        href="#"
-        className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-      >
-        <img
-          className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src="about.jpg"
-          alt=""
-        />
-        <div className="flex flex-col justify-between p-4 leading-normal">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            ABOUT
-          </h5>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+    <div className="min-h-screen bg-white py-8">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-gray-900 text-4xl font-bold mb-4">About</h1>
+          <p className="text-gray-700 text-lg font-light mb-8">
             At iMayFixIt, we're more than just a mobile repair company. We're innovators on a
             mission to redefine the repair experience. From cracked screens to software woes, trust
             us to bring creativity and expertise to every fix.
           </p>
+          <h1 className="text-gray-900 text-4xl font-bold mb-4">Meet the Team</h1>
+          <p className="text-gray-700 text-lg font-light">
+            With over 100 years of combined experience, we've got a well-seasoned team at the helm.
+          </p>
         </div>
-      </a>
-    </section>
+
+        <div className="flex flex-wrap justify-center">
+          {teamMembers.map((member, index) => (
+            <TeamMember key={index} name={member.name} title={member.title} imageSrc={member.imageSrc} />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
