@@ -7,6 +7,7 @@ const AdminPage = () => {
   const [serviceTitle, setServiceTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priceRange, setPriceRange] = useState('');
+  const [duration, setDuration] = useState('');
   const [services, setServices] = useState([]); // State to hold services
 
   const openBookingForm = (type) => {
@@ -27,7 +28,8 @@ const AdminPage = () => {
     const serviceData = {
       serviceTitle: serviceTitle,
       description: description,
-      priceRange: priceRange
+      priceRange: priceRange,
+      duration: duration
     };
     // Add new service to the list of services
     setServices([...services, serviceData]);
@@ -36,6 +38,7 @@ const AdminPage = () => {
     setServiceTitle('');
     setDescription('');
     setPriceRange('');
+    setDuration('');
 
     // Close the modal
     setShowBookingModal(false);
@@ -93,6 +96,7 @@ const AdminPage = () => {
             icon={<svg className="w-12 h-12 mx-auto text-gray-400 sm:mx-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 4H3C2.46957 4 1.96086 4.21071 1.58579 4.58579C1.21071 4.96086 1 5.46957 1 6V18C1 18.5304 1.21071 19.0391 1.58579 19.4142C1.96086 19.7893 2.46957 20 3 20H21C21.5304 20 22.0391 19.7893 22.4142 19.4142C22.7893 19.0391 23 18.5304 23 18V6C23 5.46957 22.7893 4.96086 22.4142 4.58579C22.0391 4.21071 21.5304 4 21 4Z" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 20V12H15V20" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 12V6H15V12" stroke="#111827" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
             description={service.description}
             priceRange={"₹" + service.priceRange}
+            duration={service.duration+" Number of Days"}
           />
         ))}
       </div>
@@ -149,6 +153,10 @@ const AdminPage = () => {
                   <label htmlFor="priceRange" className="block text-sm font-medium text-blue-700">Price Range</label>
                   <input type="text" id="priceRange" value={priceRange} onChange={(e) => setPriceRange(e.target.value)} autoComplete="off" required className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500" />
                 </div>
+                <div>
+                  <label htmlFor="duration" className="block text-sm font-medium text-blue-700">Enter Number of Days</label>
+                  <input type="text" id="priceRange" value={duration} onChange={(e) => setDuration(e.target.value)} autoComplete="off" required className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500" />
+                </div>
                 <div className="flex justify-end mt-4">
                   <button type="button" onClick={closeBookingForm} className="mr-4 px-6 py-2 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded focus:outline-none focus:shadow-outline">Cancel</button>
                   <button type="button" onClick={handleSaveService} className="px-6 py-2 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded focus:outline-none focus:shadow-outline">Save</button>
@@ -161,13 +169,14 @@ const AdminPage = () => {
     </div>
   );
 }
-function ServiceCard({ title, description, icon , priceRange}) {
+function ServiceCard({ title, description, icon , priceRange, duration}) {
     return (
       <div className="overflow-hidden bg-white shadow-md rounded-xl">
         <div className="p-9">
           <div className="flex justify-center mb-6">{icon}</div>
           <h3 className="mt-6 text-xl font-bold text-gray-900 sm:mt-10">{title}</h3>
           <p className="mt-6 text-base text-gray-600">{description}</p>
+          <p className="mt-6 text-base text-gray-600">{duration}</p>
           <p className="mt-6 text-base font-bold text-blue-600">{priceRange}</p>
         </div>
       </div>
