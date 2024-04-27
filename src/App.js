@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import Account from './pages/Account';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import About from './components/About'
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
         {isUserSignedIn && <Route path='/account' element={<Account />}/>}
+        <Route path='/about' element={<About />}/>
       </Routes>
       <Footer />
     </div>
