@@ -46,9 +46,6 @@ const Navbar = () => {
                   <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                 </svg>
                 <span>Account</span>
-                {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 19l-7-7m14 0l-7 7m0-8l-7-7m14 7a7 7 0 110-14 7 7 0 010 14z" clipRule="evenodd" />
-                </svg> */}
               </button>
               {showDropdown && (
                 <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg">
