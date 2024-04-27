@@ -10,6 +10,8 @@ const AdminPage = () => {
   const [duration, setDuration] = useState('');
   const [services, setServices] = useState([]); // State to hold services
 
+  const [status, setStatus] = useState('pending');
+  
   const openBookingForm = (type) => {
     setServiceType(type);
     setShowBookingModal(true);
@@ -73,13 +75,20 @@ const AdminPage = () => {
       });
   }, []); // Empty dependency array means this effect runs once after the component mounts
 
+  const renderAcceptOrCompleteButton = (status) => {
+    if (status === 'pending') {
+      return <button className="relative inline-flex text-sm sm:text-base bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg z-50">Accept</button>;
+    } else {
+      return <button className="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Complete</button>;
+    }
+  };
 
   return (
     <div>
-      <button onClick={handleAddService} className="absolute top-20 right-10 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">
+      <button onClick={handleAddService} className="float-right mt-20 mr-10 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">
         Add Service
       </button>
-      <div className="absolute top-20 left-10 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">
+      <div className="float-left mt-20 ml-10 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">
         Total Revenue: ${totalRevenue}
     </div>
     <section className="py-12 bg-gray-900 text-white sm:py-12 lg:py-16">
@@ -110,24 +119,10 @@ const AdminPage = () => {
             <ul class="border border-gray-200 rounded overflow-hidden shadow-md">
             <li class="flex justify-between px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
             <span>First Item</span>
-                <div class="flex space-x-4">
-                    <button class="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Complete</button>
-                    <button class="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Cancel</button>
-                </div>
-            </li>
-            <li class="flex justify-between px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
-            <span>First Item</span>
-                <div class="flex space-x-4">
-                    <button class="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Complete</button>
-                    <button class="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Cancel</button>
-                </div>
-            </li>
-            <li class="flex justify-between px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
-            <span>First Item</span>
-                <div class="flex space-x-4">
-                    <button class="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Complete</button>
-                    <button class="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Cancel</button>
-                </div>
+            <div className="flex space-x-4">
+                    {renderAcceptOrCompleteButton(status)}
+                    <button className="relative inline-flex text-sm sm:text-base bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg z-50">Cancel</button>
+                  </div>
             </li>
             </ul>
         </div>
