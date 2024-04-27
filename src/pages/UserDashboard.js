@@ -16,7 +16,7 @@ const UserDetailSection = ({ userData }) => {
               {/* Assuming userData contains name field */}
               <ul className="mt-2 flex flex-row items-center justify-center md:justify-start ">
                 <li className="mr-5">
-                  <a href={userData.githubLink} target="_blank" aria-label="GitHub">
+                  <a href={userData.githubLink} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                     <svg
                       className="h-6 text-indigo-700 hover:text-indigo-300"
                       fill="currentColor"
@@ -31,7 +31,7 @@ const UserDetailSection = ({ userData }) => {
                 </li>
 
                 <li>
-                  <a href={userData.twitterLink} target="_blank" aria-label="Twitter">
+                  <a href={userData.twitterLink} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                     <svg
                       className="h-6 text-indigo-700 hover:text-indigo-300"
                       fill="currentColor"
@@ -101,34 +101,31 @@ const UserDashboard = () => {
   useEffect(() => {
     // Fetch user data from the database
     // Example fetch request
-    fetchUserData().then((data) => setUserData(data));
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('your_backend_api/user');
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
     
     // Fetch billing details from the database
     // Example fetch request
-    fetchBillingDetails().then((data) => setBillingDetails(data));
+    const fetchBillingDetails = async () => {
+      try {
+        const response = await fetch('your_backend_api/billingDetails');
+        const data = await response.json();
+        setBillingDetails(data);
+      } catch (error) {
+        console.error('Error fetching billing details:', error);
+      }
+    };
+
+    fetchUserData();
+    fetchBillingDetails();
   }, []);
-
-  // Function to fetch user data
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch('your_backend_api/user');
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
-  // Function to fetch billing details
-  const fetchBillingDetails = async () => {
-    try {
-      const response = await fetch('your_backend_api/billingDetails');
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching billing details:', error);
-    }
-  };
 
   return (
     <div className="bg-white min-h-screen flex flex-col justify-center items-center py-8 px-4">
