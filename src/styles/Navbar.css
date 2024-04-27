@@ -1,0 +1,37 @@
+/* Styles for the Navbar component */
+.navbar {
+    background-color: #1a202c; /* Dark background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  }
+  
+  .navbar .max-w-7xl {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* Padding on smaller screens */
+    padding-right: 1rem; /* Padding on smaller screens */
+  }
+  
+  .navbar .flex {
+    justify-content: space-between; /* Space between logo and links */
+  }
+  
+  .navbar .logo {
+    color: #ffffff; /* White text color */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: 700; /* Bold font weight */
+  }
+  
+  .navbar .nav-links {
+    display: flex;
+    gap: 1rem; /* Spacing between navigation links */
+  }
+  
+  .navbar .nav-links a {
+    color: #ffffff; /* White text color */
+    transition: color 0.3s ease; /* Smooth color transition */
+  }
+  
+  .navbar .nav-links a:hover {
+    color: #cbd5e0; /* Light gray text color on hover */
+  }
+  
