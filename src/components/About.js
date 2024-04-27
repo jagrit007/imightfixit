@@ -58,7 +58,7 @@ const AboutSection = () => {
     {
       name: 'Mehul Verma',
       title: 'Sales Representative',
-      imageSrc: 'https://images.unsplash.com/photo-1646009759852-f035b994a783?fit=clamp&w=400&h=400&q=80'
+      imageSrc: 'https://images.unsplash.com/photo-1521985179118-6008b8cef2c2?fit=clamp&w=400&h=400&q=80'
     },
     {
       name: 'Jagrit Thapar',
