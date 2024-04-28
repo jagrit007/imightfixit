@@ -1,6 +1,6 @@
 import React from 'react';
 
-const companyName = "iMayFixIt";
+const companyName = "iMightFixIt";
   const companyDescription = "We are dedicated to providing top-quality mobile repair services with a smile!";
   const missionStatement = "Our mission is to fix phones and bring joy to our customers by restoring their devices to optimal condition.";
 
@@ -71,7 +71,7 @@ const AboutSection = () => {
         <div className="text-center mb-12">
           <h1 className="text-gray-900 text-4xl font-bold mb-4">About</h1>
           <p className="text-gray-700 text-lg font-light mb-8">
-            At iMayFixIt, we're more than just a mobile repair company. We're innovators on a
+            At iMightFixIt, we're more than just a mobile repair company. We're innovators on a
             mission to redefine the repair experience. From cracked screens to software woes, trust
             us to bring creativity and expertise to every fix.
           </p>

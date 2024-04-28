@@ -11,10 +11,10 @@ const Home = () => {
             <div class="md:w-1/2 lg:w-2/3">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl text-white font-bold mb-6">
                     Welcome to our <br class="hidden md:block" />
-                    <span class="text-indigo-500">iMayFixIt</span> Website
+                    <span class="text-indigo-500">iMightFixIt</span> Website
                 </h1>
                 <p class="text-lg md:text-xl lg:text-2xl text-gray-400 mb-8">
-                Don't Worry,I May Fix It—Probably!
+                Don't Worry,I Might Fix It—Probably!
                 </p>
                 <div class="flex gap-2">
                     <a href="/login" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-md">Login/Register
