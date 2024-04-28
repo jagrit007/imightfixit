@@ -50,7 +50,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/order', {
+        const response = await fetch('http://localhost:5001/order', {
           headers: {
             'Authorization': `${userToken}`
           }
@@ -68,7 +68,7 @@ const AdminPage = () => {
   }, []);
 
   function fetchServiceCards() {
-    axios.get('http://localhost:5000/service/getAll')
+    axios.get('http://localhost:5001/service/getAll')
       .then(response => {
         console.log(response.data.data);
         if (response.data.status === 'success') {
@@ -93,7 +93,7 @@ const AdminPage = () => {
   
   const completeOrder = async (orderId) => {
     try {
-      const response = await fetch(`http://localhost:5000/order/finish/${orderId}`, {
+      const response = await fetch(`http://localhost:5001/order/finish/${orderId}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `${userToken}`,
@@ -118,7 +118,7 @@ const AdminPage = () => {
   
   const cancelOrder = async (orderId) => {
     try {
-      const response = await fetch(`http://localhost:5000/order/finish/${orderId}`, {
+      const response = await fetch(`http://localhost:5001/order/finish/${orderId}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `${userToken}`,
@@ -143,7 +143,7 @@ const AdminPage = () => {
   
   const acceptOrder = async (orderId) => {
     try {
-      const response = await fetch(`http://localhost:5000/order/accept/${orderId}`, {
+      const response = await fetch(`http://localhost:5001/order/accept/${orderId}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `${userToken}`,
@@ -189,7 +189,7 @@ const AdminPage = () => {
     setShowBookingModal(false);
 
     // Send the service data to the backend
-    axios.post('http://localhost:5000/service/add', {
+    axios.post('http://localhost:5001/service/add', {
       name: serviceTitle,
       price: priceRange,
       description: description,

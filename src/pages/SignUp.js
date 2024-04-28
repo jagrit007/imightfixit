@@ -41,7 +41,7 @@ const SignUp = () => {
             return;
         }
 
-        axios.post("http://localhost:5000/user/register", { name:username, email, password })
+        axios.post("http://localhost:5001/user/register", { name:username, email, password })
         .then(()=>{
             alert('Registration Successful!')
             setEmail('')

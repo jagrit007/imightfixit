@@ -32,7 +32,7 @@ function MobileRepairServices() {
   }, []);
 
   function fetchServiceCards() {
-    axios.get('http://localhost:5000/service/getAll')
+    axios.get('http://localhost:5001/service/getAll')
       .then(response => {
         console.log(response.data.data);
         if (response.data.status === 'success') {
@@ -68,7 +68,7 @@ function MobileRepairServices() {
   const submitBookingForm = () => {
     console.log(formData);
     // here we call api:
-    axios.post(`http://localhost:5000/order/place/${serviceType}`, formData, {
+    axios.post(`http://localhost:5001/order/place/${serviceType}`, formData, {
         headers: {
           'Authorization': `${userToken}`
         }

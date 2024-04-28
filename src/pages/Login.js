@@ -34,7 +34,7 @@ const Login = () => {
         }
         
         try {
-            const response = await axios.post('http://localhost:5000/user/login', { email, password })
+            const response = await axios.post('http://localhost:5001/user/login', { email, password })
             if (response.data?.status =='failure'){alert("Incorrect password!")} 
             const token = response.data.token
             const role = response.data.role
