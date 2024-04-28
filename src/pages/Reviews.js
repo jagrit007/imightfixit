@@ -38,28 +38,13 @@ function CustomerReviewSection() {
         });
     };
 
-    // Function to render stars based on the rating
-    const renderStars = (rating) => {
-        const filledStars = '★'.repeat(rating);
-        const emptyStars = '☆'.repeat(5 - rating);
-        return filledStars + emptyStars;
-    };
-
-    // Function to generate a random user avatar URL
-    function generateAvatar() {
-        const gender = Math.random() < 0.5 ? 'men' : 'women';
-        const randomNumber = Math.floor(Math.random() * 99) + 1;
-        return `https://randomuser.me/api/portraits/${gender}/${randomNumber}.jpg`;
-    };
-
     function fetchReviews() {
         axios.get('http://localhost:5000/review/')
             .then(response => {
                 console.log(response.data.data);
                 if (response.data.status === 'success') {
                     if (response.data.data.length > 0){
-
-                        setReviews([...reviews, ...response.data.data]);
+                        setReviews([...response.data.data]);
                     }
                 } else {
                     throw new Error('Failed to fetch review cards');
@@ -81,7 +66,8 @@ function CustomerReviewSection() {
         })
             .then(response => {
                 console.log(response.data);
-                console.log('Service details saved successfully:', response.data);
+                console.log('Review details saved successfully:', response.data);
+                fetchReviews()
             })
             .catch(error => {
                 console.error(error);
