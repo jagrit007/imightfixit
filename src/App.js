@@ -11,7 +11,7 @@ import Footer from './components/Footer';
 import About from './components/About'
 import Checkout from './pages/Checkout';
 import Thanks from './pages/Thanks'
-import Reviews from './pages/Reviews';
+import CustomerReviewSection from './pages/Reviews';
 import React from 'react';
 import AdminPage from './pages/Admin';
 
@@ -29,7 +29,7 @@ function App() {
         <Route path='/' element={<Home />}/>
         <Route path='/login' element={<Login />}/>
         <Route path='/signup' element={<SignUp />}/>
-        <Route path='/reviews' element={<Reviews />}/>
+        <Route path='/reviews' element={<CustomerReviewSection />}/>
         <Route path='/services' element={<Services/>}/>
         {isUserSignedIn && isUserAdmin && <Route path='/admin' element={<AdminPage/>}/>}
 
@@ -38,6 +38,7 @@ function App() {
         <Route path='/about' element={<About />}/>
         {isUserSignedIn && <Route path='/checkout' element={<Checkout />}/>}
         {isUserSignedIn && <Route path='/thanks' element={<Thanks />}/>}
+
       </Routes>
       <Footer />
     </div>

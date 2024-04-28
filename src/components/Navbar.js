@@ -47,7 +47,7 @@ const Navbar = () => {
               <a href="/about">About</a>
             </li>
             <li className={`md:px-4 md:py-2 ${location.pathname === '/contact' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
-              <a href="/contact">Contact</a>
+              <a href="/reviews">Reviews</a>
             </li>
             {!isUserSignedIn && (
               <li className={`md:px-4 md:py-2 ${location.pathname === '/signup' ? 'text-indigo-500' : 'hover:text-indigo-400'}`}>
@@ -84,6 +84,7 @@ const Navbar = () => {
               )}
             </div>
           ) : (
+            <a href='/login'>
             <button className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
               {/* <!-- Heroicons - Login Solid --> */}
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -91,6 +92,7 @@ const Navbar = () => {
               </svg>
               <Link to="/login">Login</Link>
             </button>
+            </a>
           )}
 		</div>
 	</div>
