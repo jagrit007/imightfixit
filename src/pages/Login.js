@@ -36,8 +36,11 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:5000/user/login', { email, password })
             if (response.data?.status =='failure'){alert("Incorrect password!")} 
+            console.log(response.data)
             const token = response.data.token
             const role = response.data.role
+            const user_email = response.data.email
+            const name = response.data.name
             alert("Login successful");
             setEmail('')
             setPassword('')
@@ -46,6 +49,8 @@ const Login = () => {
             window.location.reload();
             localStorage.setItem('token', token)
             localStorage.setItem('role', role)
+            localStorage.setItem('name', name)
+            localStorage.setItem('email', user_email)
         } catch (error) {
             alert("Incorrect credentials!");
             console.error("Error in login!");
