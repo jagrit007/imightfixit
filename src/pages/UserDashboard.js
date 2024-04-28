@@ -49,7 +49,7 @@ const BillingDetailSection = ({ billingDetails }) => {
 
   useEffect(() => {
     // Calculate total amount from billing details
-    const total = billingDetails.reduce((acc, item) => acc + item.total_price, 0);
+    const total = billingDetails.reduce((acc, item) => acc + parseInt(item.total_price), 0);
     setTotalAmount(total);
   }, [billingDetails]);
 

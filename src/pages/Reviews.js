@@ -1,37 +1,18 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
 function CustomerReviewSection() {
+    const userToken = localStorage.getItem('token');
+    useEffect(() => {
+        // Fetch additional service cards from the database
+        fetchReviews();
+    }, []);
     // State to manage submitted reviews
-    const [reviews, setReviews] = useState([
-        {
-            user_id: 'John Doe',
-            rating: 4,
-            comment: 'Overall, my experience with the smartphone repair service was decent. The staff was friendly and accommodating, and they were able to fix my device in a timely manner. However, there were a few hiccups along the way. Firstly, the communication could have been better; I had to follow up multiple times to get updates on the status of my repair. Secondly, while the repair itself was successful, I noticed a small issue with the screen sensitivity post-repair, which was a bit disappointing. Nonetheless, the price was reasonable, and my phone is now functioning again. It wasnot a flawless experience, but it got the job done.',
-            avatar: generateAvatar()
-        },
-        {
-            user_id: 'Jane Smith',
-            rating: 2,
-            comment: '"Disappointing experience overall. While the staff seemed knowledgeable, the repair process took longer than expected, extending beyond the estimated timeframe. Communication was lacking, with minimal updates provided on the status of my device. Additionally, upon receiving my smartphone back, I noticed some minor issues persisting, indicating that the repair may not have been as thorough as I had hoped. Overall, the service fell short of my expectations."',
-            avatar: generateAvatar()
-        },
-        {
-            user_id: 'David Johnson',
-            rating: 3,
-            comment: '"Overall, my experience with the smartphone repair service was decent. The staff was friendly and accommodating, and they were able to fix my device in a timely manner. However, there were a few hiccups along the way. Firstly, the communication could have been better; I had to follow up multiple times to get updates on the status of my repair. Secondly, while the repair itself was successful, I noticed a small issue with the screen sensitivity post-repair, which was a bit disappointing. Nonetheless, the price was reasonable, and my phone is now functioning again."',
-            avatar: generateAvatar()
-        },
-        {
-            user_id: 'Emily Davis',
-            rating: 5,
-            comment: 'Great service! Quick, friendly staff fixed my phone perfectly. Fair prices, no surprises. Highly recommend!',
-            avatar: generateAvatar()
-        }
-    ]);
+    const [reviews, setReviews] = useState([]);
 
     // State to manage form input
     const [formData, setFormData] = useState({
-        user_id: '',
+        username: '',
         rating: 0,
         comment: ''
     });
@@ -39,11 +20,10 @@ function CustomerReviewSection() {
     // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add the submitted review to the reviews state
-        setReviews([...reviews, { ...formData, avatar: generateAvatar() }]);
+        submitReview()
         // Reset the form data
         setFormData({
-            user_id: '',
+            username: '',
             rating: 0,
             comment: ''
         });
@@ -72,6 +52,43 @@ function CustomerReviewSection() {
         return `https://randomuser.me/api/portraits/${gender}/${randomNumber}.jpg`;
     };
 
+    function fetchReviews() {
+        axios.get('http://localhost:5000/review/')
+            .then(response => {
+                console.log(response.data.data);
+                if (response.data.status === 'success') {
+                    if (response.data.data.length > 0){
+
+                        setReviews([...reviews, ...response.data.data]);
+                    }
+                } else {
+                    throw new Error('Failed to fetch review cards');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching review cards:', error);
+            });
+    }
+
+    function submitReview() {
+        axios.post('http://localhost:5000/review/', {
+            comment: formData.comment,
+            rating: formData.rating
+        }, {
+            headers: {
+                'Authorization': `${userToken}`
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                console.log('Service details saved successfully:', response.data);
+            })
+            .catch(error => {
+                console.error(error);
+                // Handle error
+            });
+    }
+
     return (
         <div className="bg-gray-100 font-sans">
             <header className="bg-blue-500 text-white py-4">
@@ -86,19 +103,22 @@ function CustomerReviewSection() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {/* Display pre-made and submitted reviews */}
-                    {reviews.map((review, index) => (
+                    {/*{reviews.map((review, index) => (
                         <div key={index} className="bg-white p-6 rounded-lg shadow-md">
                             <div className="flex items-center mb-4">
                                 <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                    <img src={review.avatar} alt="User Avatar" />
+                                    <img src={generateAvatar()} alt="User Avatar" />
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold">{review.user_id}</h3>
+                                    <h3 className="text-lg font-bold">{review.username}</h3>
                                     <p className="text-gray-600">Rating: {renderStars(review.rating)}</p>
                                 </div>
                             </div>
                             <p className="text-gray-800">{review.comment}</p>
                         </div>
+                    ))}*/}
+                    {reviews.map((review, index) => (
+                        <OneReview review = {review} index={index} />
                     ))}
                     {/* End Display Reviews */}
                 </div>
@@ -107,10 +127,6 @@ function CustomerReviewSection() {
                 <div className="mt-8">
                     <h2 className="text-2xl font-bold mb-4">Write a Review</h2>
                     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-                        <div className="mb-4">
-                            <label htmlFor="user_id" className="block text-gray-800 font-semibold mb-2">User ID</label>
-                            <input type="text" id="user_id" name="user_id" value={formData.user_id} onChange={handleChange} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required />
-                        </div>
                         <div className="mb-4">
                             <label htmlFor="rating" className="block text-gray-800 font-semibold mb-2">Rating</label>
                             <input type="number" id="rating" name="rating" value={formData.rating} onChange={handleChange} min="1" max="5" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required />
@@ -127,5 +143,38 @@ function CustomerReviewSection() {
         </div>
     );
 }
+
+const OneReview = ({review, index}) => {
+    console.log(review);
+    const [avatarUrl, setAvatarUrl] = useState('');
+
+    useEffect(() => {
+        const gender = Math.random() < 0.5 ? 'men' : 'women';
+        const randomNumber = Math.floor(Math.random() * 99) + 1;
+        const url = `https://randomuser.me/api/portraits/${gender}/${randomNumber}.jpg`;
+        setAvatarUrl(url);
+    }, []); // Run only once on component mount
+
+    const renderStars = (rating) => {
+        const filledStars = '★'.repeat(rating);
+        const emptyStars = '☆'.repeat(5 - rating);
+        return filledStars + emptyStars;
+    };
+
+    return (
+        <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+            <div className="flex items-center mb-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <img src={avatarUrl} alt="User Avatar"/>
+                </div>
+                <div>
+                    <h3 className="text-lg font-bold">{review.username}</h3>
+                    <p className="text-gray-600">Rating: {renderStars(review.rating)}</p>
+                </div>
+            </div>
+            <p className="text-gray-800">{review.comment}</p>
+        </div>
+    );
+};
 
 export default CustomerReviewSection;
