@@ -90,7 +90,8 @@ function MobileRepairServices() {
       deliveryAddress: '',
       service_id: ''
     });
-    alert("Service booked successfully!");
+    alert("Service booked successfully. Please pay:");
+    navigate('/checkout');
     closeBookingForm();
   };
 
